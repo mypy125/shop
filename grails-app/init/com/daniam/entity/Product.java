@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -22,11 +19,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String code;
-    private String name;
-    private BigDecimal price;
-    private LocalDate productionDate;
-    private LocalDate expirationDate;
-    private int quantity;
 
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private BigDecimal price;
+
+    @Column(nullable = false)
+    private LocalDate productionDate;
+
+    private LocalDate expirationDate;
 }

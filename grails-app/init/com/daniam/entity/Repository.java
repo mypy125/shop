@@ -21,5 +21,5 @@ public class Repository {
 
     private String code;
     private String name;
-    private Map<Product, Integer> products;
+//    private Map<Product, Integer> products;
 }

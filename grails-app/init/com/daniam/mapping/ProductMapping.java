@@ -6,24 +6,23 @@ import com.daniam.entity.Product;
 public class ProductMapping implements Mapping<Product, ProductCreateDto> {
     @Override
     public ProductCreateDto toDto(Product entity) {
-        return new ProductCreateDto(
-                entity.getCode(),
-                entity.getName(),
-                entity.getPrice(),
-                entity.getProductionDate(),
-                entity.getExpirationDate(),
-                entity.getQuantity());
+        return ProductCreateDto.builder()
+                .code(entity.getCode())
+                .name(entity.getName())
+                .price(entity.getPrice())
+                .productionDate(entity.getProductionDate())
+                .expirationDate(entity.getExpirationDate())
+                .build();
     }
 
     @Override
     public Product toEntity(ProductCreateDto dto) {
         return Product.builder()
-                .code(dto.code())
-                .name(dto.name())
-                .price(dto.price())
-                .productionDate(dto.productionDate())
-                .expirationDate(dto.expirationDate())
-                .quantity(dto.quantity())
+                .code(dto.getCode())
+                .name(dto.getName())
+                .price(dto.getPrice())
+                .productionDate(dto.getProductionDate())
+                .expirationDate(dto.getExpirationDate())
                 .build();
     }
 }

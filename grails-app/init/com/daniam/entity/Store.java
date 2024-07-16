@@ -22,5 +22,5 @@ public class Store {
     private String code;
     private String name;
     private String address;
-    private Map<Product, Integer> products;
+//    private Map<Product, Integer> products;
 }
