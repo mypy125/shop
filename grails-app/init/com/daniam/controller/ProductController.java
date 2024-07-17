@@ -4,7 +4,7 @@ import com.daniam.dto.ProductCreateDto;
 import com.daniam.entity.Product;
 import com.daniam.request.ProductUpdateRequestDto;
 import com.daniam.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +14,14 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
+@RequiredArgsConstructor
 public class ProductController {
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> getAllProduct = productService.getAllProducts();
-        return new ResponseEntity<List<Product>>(getAllProduct,HttpStatus.OK);
+        return new ResponseEntity<>(getAllProduct, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

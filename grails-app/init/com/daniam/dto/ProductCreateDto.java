@@ -1,8 +1,5 @@
 package com.daniam.dto;
 
-
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 

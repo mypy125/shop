@@ -52,6 +52,7 @@ dependencies {
 //    implementation("org.grails.plugins:gsp")
     implementation("org.grails.plugins:hibernate5")
     implementation("org.grails.plugins:scaffolding")
+    implementation("org.postgresql:postgresql:42.7.3")
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter")
