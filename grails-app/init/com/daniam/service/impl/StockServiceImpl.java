@@ -31,6 +31,6 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public List<Stock> getAllStock() {
-        return List.of((Stock) stockRepository.findAll());
+        return stockRepository.findAll();
     }
 }

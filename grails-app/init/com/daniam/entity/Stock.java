@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.Map;
 
 @Entity
@@ -23,5 +24,5 @@ public class Stock {
     @ElementCollection
     @MapKeyJoinColumn(name = "product_id")
     @Column(name = "quantity")
-    private Map<Product, Integer> products;
+    private Map<Product, Integer> products = new HashMap<>();
 }

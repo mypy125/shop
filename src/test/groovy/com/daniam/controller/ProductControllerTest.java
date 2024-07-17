@@ -118,7 +118,6 @@ class ProductControllerTest {
 
     @Test
     void testUpdateProduct() {
-        // Mock data
         Long productId = 1L;
         ProductUpdateRequestDto updateRequestDto = ProductUpdateRequestDto.builder()
                 .code("12345")
