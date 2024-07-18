@@ -49,26 +49,14 @@ grails:
       codec: html
   controllers:
     defaultScope: singleton
-spring:
-  main:
-    allow-bean-definition-overriding: true
-#dataSource:
-#  url: jdbc:h2:mem:devDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
-#  driverClassName: org.h2.Driver
-#  username: sa
-#  password: ''
-#  pooled: true
-#  jmxExport: true
-#  dbCreate: update
-
 dataSource:
+  url: jdbc:h2:mem:devDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+  driverClassName: org.h2.Driver
+  username: sa
+  password: ''
   pooled: true
   jmxExport: true
-  driverClassName: org.postgresql.Driver
-  username: admin
-  password: pass
-  dialect: org.hibernate.dialect.PostgreSQLDialect
-  url: jdbc:postgresql://localhost:5432/shop
+  dbCreate: update
 
 hibernate:
   cache:
