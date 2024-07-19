@@ -1,10 +1,13 @@
 buildscript {
+    ext {
+        springBootVersion = '2.7.7'
+    }
     repositories {
         mavenCentral()
         maven { url "https://repo.grails.org/grails/core" }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:3.3.1"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath 'io.micronaut:micronaut-inject-groovy:3.10.3'
     }
 }
@@ -29,7 +32,7 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom "org.grails:grails-bom:4.0.11"
-        mavenBom "org.springframework.boot:spring-boot-dependencies:3.3.1"
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
     }
     applyMavenExclusions false
 }
@@ -57,10 +60,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-logging")
     implementation("org.springframework.boot:spring-boot-starter-tomcat")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.projectlombok:lombok:1.18.28")
     compileOnly("io.micronaut:micronaut-inject-groovy")
     console("org.grails:grails-console")
-    compileOnly("org.projectlombok:lombok:1.18.34")
+    compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.bertramlabs.plugins:asset-pipeline-grails:4.3.0")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.apache.tomcat:tomcat-jdbc")
@@ -81,7 +83,7 @@ dependencies {
 //}
 
 java {
-    sourceCompatibility = JavaVersion.toVersion("17")
+    sourceCompatibility = JavaVersion.toVersion("11")
 }
 
 bootRun {
@@ -98,12 +100,12 @@ bootRun {
     classpath = sourceSets.main.runtimeClasspath
 }
 
-//tasks.withType(GroovyCompile) {
-//    configure(groovyOptions) {
-//        forkOptions.jvmArgs = ['-noverify']
-//    }
-//
-//}
+tasks.withType(GroovyCompile) {
+    configure(groovyOptions) {
+        forkOptions.jvmArgs = ['-noverify']
+    }
+
+}
 
 test {
     useJUnitPlatform()

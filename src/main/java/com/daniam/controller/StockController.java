@@ -22,14 +22,16 @@ public class StockController {
     @PostMapping("/{stockId}/products")
     public ResponseEntity<Stock> addProductToStock(@PathVariable Long stockId,
                                                    @RequestBody Product product,
-                                                   @RequestParam int quantity){
+                                                   @RequestParam int quantity
+    ){
         Stock addProductStock = stockService.addProductToStock(stockId, product, quantity);
         return new ResponseEntity<>(addProductStock, HttpStatus.OK);
     }
 
     @DeleteMapping("/{stockId}/products")
     public ResponseEntity<Stock> removeProductFromStock(@PathVariable Long stockId,
-                                                            @RequestBody Product product){
+                                                            @RequestBody Product product
+    ){
         Stock removeProductFromeStock = stockService.removeProductFromStock(stockId, product);
         return new ResponseEntity<>(removeProductFromeStock, HttpStatus.OK);
     }

@@ -5,13 +5,38 @@ import com.daniam.domain.Stock;
 import com.daniam.service.StockService;
 import com.daniam.exception.StockNotFoundException;
 import com.daniam.repository.StockRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@RequiredArgsConstructor
+@Service
 public class StockServiceImpl implements StockService {
     private final StockRepository stockRepository;
+
+    public StockServiceImpl(StockRepository stockRepository) {
+        this.stockRepository = stockRepository;
+    }
+
+    @Override
+    public Stock save(Stock stock) {
+        return stockRepository.save(stock);
+    }
+
+    @Override
+    public List<Stock> getAllStock() {
+        return stockRepository.findAll();
+    }
+
+    @Override
+    public Optional<Stock> findById(Long id) {
+        return stockRepository.findById(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        stockRepository.deleteById(id);
+    }
 
     @Override
     public Stock addProductToStock(Long stockId, Product product, int quantity) {
@@ -29,8 +54,4 @@ public class StockServiceImpl implements StockService {
         return stockRepository.save(removProductStock);
     }
 
-    @Override
-    public List<Stock> getAllStock() {
-        return stockRepository.findAll();
-    }
 }

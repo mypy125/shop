@@ -11,6 +11,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,17 +27,25 @@ class StockControllerTest {
     @InjectMocks
     private StockController stockController;
 
+    private Product product;
+    private  Stock stock;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        product = new Product(
+                "12345", "Test product1", BigDecimal.valueOf(19.99),
+                LocalDate.now(), LocalDate.now().plusDays(10)
+        );
+
+        stock = new Stock();
+        stock.setId(1L);
     }
 
     @Test
     void addProductToStock() {
         Long stockId = 1L;
-        Product product = new Product();
         int quantity = 10;
-        Stock stock = new Stock();
 
         when(stockService.addProductToStock(stockId, product, quantity)).thenReturn(stock);
 
@@ -48,8 +58,6 @@ class StockControllerTest {
     @Test
     void removeProductFromStock() {
         Long stockId = 1L;
-        Product product = new Product();
-        Stock stock = new Stock();
 
         when(stockService.removeProductFromStock(stockId, product)).thenReturn(stock);
 

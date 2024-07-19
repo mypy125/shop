@@ -1,25 +1,30 @@
 package com.daniam.service.impl;
 
-import com.daniam.controller.dto.ProductCreateDto;
+import com.daniam.controller.dto.ProductCreateRequestDto;
 import com.daniam.domain.Product;
 import com.daniam.exception.ProductException;
 import com.daniam.exception.ProductNotFoundException;
 import com.daniam.mapping.ProductMapping;
 import com.daniam.repository.ProductRepository;
-import com.daniam.controller.request.ProductUpdateRequestDto;
+import com.daniam.controller.dto.ProductUpdateRequestDto;
 import com.daniam.service.ProductService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
+@Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapping productMapping;
 
+    public ProductServiceImpl(ProductRepository productRepository, ProductMapping productMapping) {
+        this.productRepository = productRepository;
+        this.productMapping = productMapping;
+    }
+
     @Override
-    public Product createProduct(ProductCreateDto dto) {
+    public Product createProduct(ProductCreateRequestDto dto) {
         if(productRepository.existsByCode(dto.getCode())){
             throw new ProductException("Product with this code already exists");
         }
@@ -29,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Optional<Product> getProductById(Long id) {
-        return Optional.of(productRepository.findById(id).get());
+        return productRepository.findById(id);
     }
 
     @Override

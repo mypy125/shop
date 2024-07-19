@@ -1,14 +1,12 @@
 package com.daniam.mapping;
 
-import com.daniam.controller.dto.ProductCreateDto;
+import com.daniam.controller.dto.ProductCreateRequestDto;
 import com.daniam.domain.Product;
 
-import java.time.LocalDate;
-
-public class ProductMapping implements Mapping<Product, ProductCreateDto> {
+public class ProductMapping implements Mapping<Product, ProductCreateRequestDto> {
     @Override
-    public ProductCreateDto toDto(Product entity) {
-        return new ProductCreateDto(
+    public ProductCreateRequestDto toDto(Product entity) {
+        return new ProductCreateRequestDto(
                 entity.getCode(),
                 entity.getName(),
                 entity.getPrice(),
@@ -17,8 +15,9 @@ public class ProductMapping implements Mapping<Product, ProductCreateDto> {
         );
     }
 
+
     @Override
-    public Product toEntity(ProductCreateDto dto) {
+    public Product toEntity(ProductCreateRequestDto dto) {
         return new Product(
                 dto.getCode(),
                 dto.getName(),
@@ -27,4 +26,5 @@ public class ProductMapping implements Mapping<Product, ProductCreateDto> {
                 dto.getExpirationDate()
         );
     }
+
 }
