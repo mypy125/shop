@@ -12,23 +12,23 @@ buildscript {
     }
 }
 plugins {
-    id "org.springframework.boot"
-    id "io.spring.dependency-management"
-    id "org.grails.grails-web"
+    id "groovy"
     id "org.grails.grails-gsp"
+    id "org.grails.grails-web"
     id "war"
-    id "java"
+    id "idea"
+    id "com.bertramlabs.asset-pipeline"
+    id "application"
+    id "eclipse"
 }
 
-group "com.daniam"
-
+group = "com.daniam"
 
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "https://repo.grails.org/grails/core" }
+    maven { url "https://repo.grails.org/grails/core/" }
 }
-
 dependencyManagement {
     imports {
         mavenBom "org.grails:grails-bom:4.0.11"
@@ -36,12 +36,14 @@ dependencyManagement {
     }
     applyMavenExclusions false
 }
+configurations {
+    all {
+    }
+}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    runtimeOnly("org.postgresql:postgresql")
-
+    implementation("org.codehaus.groovy:groovy")
     implementation("org.grails:grails-core")
     implementation("org.grails:grails-logging")
     implementation("org.grails:grails-plugin-databinding")
@@ -54,21 +56,23 @@ dependencies {
     implementation("org.grails.plugins:gsp")
     implementation("org.grails.plugins:hibernate5")
     implementation("org.grails.plugins:scaffolding")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-jetty")
     implementation("org.springframework.boot:spring-boot-starter-logging")
-    implementation("org.springframework.boot:spring-boot-starter-tomcat")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     compileOnly("io.micronaut:micronaut-inject-groovy")
     console("org.grails:grails-console")
-    compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.bertramlabs.plugins:asset-pipeline-grails:4.3.0")
-    runtimeOnly("com.h2database:h2")
     runtimeOnly("org.apache.tomcat:tomcat-jdbc")
     runtimeOnly("org.fusesource.jansi:jansi:1.18")
+    runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation("org.spockframework:spock-core:2.0-groovy-3.0")
+    testImplementation("org.spockframework:spock-spring:2.0-groovy-3.0")
     testImplementation("io.micronaut:micronaut-inject-groovy")
     testImplementation("org.grails:grails-gorm-testing-support")
     testImplementation("org.grails:grails-web-testing-support")
@@ -85,7 +89,6 @@ dependencies {
 java {
     sourceCompatibility = JavaVersion.toVersion("11")
 }
-
 bootRun {
     jvmArgs(
             '-Dspring.output.ansi.enabled=always',
@@ -99,14 +102,15 @@ bootRun {
     sourceResources sourceSets.main
     classpath = sourceSets.main.runtimeClasspath
 }
-
 tasks.withType(GroovyCompile) {
     configure(groovyOptions) {
         forkOptions.jvmArgs = ['-noverify']
     }
-
 }
-
 test {
     useJUnitPlatform()
+}
+assets {
+    minifyJs = true
+    minifyCss = true
 }
