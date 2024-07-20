@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Этот сервисный класс управляет запасами складами продуктов.
+ */
 @Service
 public class StockServiceImpl implements StockService {
     private final StockRepository stockRepository;

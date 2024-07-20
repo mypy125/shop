@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Этот сервисный класс отвечает за управление продуктами в системе.
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;

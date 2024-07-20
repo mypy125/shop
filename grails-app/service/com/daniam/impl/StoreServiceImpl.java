@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Этот сервисный класс управляет магазинами и их взаимодействием с запасами на складах.
+ */
 @Service
 public class StoreServiceImpl implements StoreService {
     private final StoreRepository storeRepository;
