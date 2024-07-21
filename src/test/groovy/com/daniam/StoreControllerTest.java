@@ -3,25 +3,27 @@ package com.daniam;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
-import com.daniam.dto.ProductReturnRequestDto;
-import com.daniam.dto.ProductSaleRequestDto;
+import com.daniam.dto.StoreCreateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.daniam.dto.ProductReturnRequestDto;
+import com.daniam.dto.ProductSaleRequestDto;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -88,7 +90,13 @@ class StoreControllerTest {
 
 //    @Test
 //    void createStore() throws Exception {
-//        Store store = new Store();
+//        StoreCreateRequestDto storeDto = new StoreCreateRequestDto();
+//        storeDto.setPassword("password");
+//        storeDto.setName("Store Name");
+//        storeDto.setAddress("Store Address");
+//        Map<Product, Integer> products = new HashMap<>();
+//        products.put(product, 10);
+//        storeDto.setProducts(products);
 //        String storeJson = objectMapper.writeValueAsString(store);
 //
 //        mockMvc.perform(post("/stores")

@@ -27,6 +27,18 @@ public class ProductUpdateRequestDto{
         this.code = code;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setProductionDate(LocalDate productionDate) {
+        this.productionDate = productionDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
     public void setPrice(BigDecimal price) {
         this.price = price;
     }

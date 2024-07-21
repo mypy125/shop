@@ -1,16 +1,11 @@
 package com.daniam.impl;
 
-import com.daniam.Product;
-import com.daniam.Stock;
-import com.daniam.Store;
-import com.daniam.StockNotFoundException;
-import com.daniam.StoreArgumentException;
-import com.daniam.StockRepository;
-import com.daniam.StoreRepository;
-import com.daniam.StoreService;
+import com.daniam.*;
+import com.daniam.dto.StoreCreateRequestDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -22,6 +17,7 @@ import java.util.Optional;
 public class StoreServiceImpl implements StoreService {
     private final StoreRepository storeRepository;
     private final StockRepository stockRepository;
+    private StoreMapping storeMapping;
 
     public StoreServiceImpl(StoreRepository storeRepository, StockRepository stockRepository) {
         this.storeRepository = storeRepository;
@@ -31,6 +27,11 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public Store save(Store store) {
         return storeRepository.save(store);
+    }
+
+    @Override
+    public Store createStore(StoreCreateRequestDto dto) {
+        return storeRepository.save(storeMapping.toEntity(dto));
     }
 
     @Override
@@ -127,17 +128,22 @@ public class StoreServiceImpl implements StoreService {
     public void checkAndReturnExpiredProducts() {
         List<Store> stores = storeRepository.findAll();
         for (Store store : stores) {
+            Map<Product, Integer> expiredProducts = new HashMap<>();
             store.getProducts().forEach((product, quantity) -> {
                 if (product.getExpirationDate() != null && product.getExpirationDate().isBefore(LocalDate.now())) {
-                    Stock stock = stockRepository.findAll().stream()
-                            .filter(stc -> stc.getProducts().containsKey(product))
-                            .findFirst()
-                            .orElseThrow(() -> new StockNotFoundException("Stock Not Found"));
-                    stock.getProducts().put(product, stock.getProducts().getOrDefault(product, 0) + quantity);
-                    store.getProducts().remove(product);
-                    stockRepository.save(stock);
-                    storeRepository.save(store);
+                    expiredProducts.put(product, quantity);
                 }
+            });
+
+            expiredProducts.forEach((product, quantity) -> {
+                Stock stock = stockRepository.findAll().stream()
+                        .filter(stc -> stc.getProducts().containsKey(product))
+                        .findFirst()
+                        .orElseThrow(() -> new StockNotFoundException("Stock Not Found"));
+                stock.getProducts().put(product, stock.getProducts().getOrDefault(product, 0) + quantity);
+                store.getProducts().remove(product);
+                stockRepository.save(stock);
+                storeRepository.save(store);
             });
         }
     }

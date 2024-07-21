@@ -2,6 +2,7 @@ package com.daniam;
 
 import com.daniam.dto.ProductReturnRequestDto;
 import com.daniam.dto.ProductSaleRequestDto;
+import com.daniam.dto.StoreCreateRequestDto;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +31,10 @@ public class StoreController {
         return store.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Store> createStore(@RequestBody Store store
+    @PostMapping
+    public ResponseEntity<Store> createStore(@RequestBody StoreCreateRequestDto dto
     ) {
-        Store createdStore = storeService.save(store);
+        Store createdStore = storeService.createStore(dto);
         return ResponseEntity.ok(createdStore);
     }
 

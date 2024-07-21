@@ -1,6 +1,7 @@
 package com.daniam;
 
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
@@ -100,31 +101,28 @@ class StoreServiceTest {
         verify(storeRepository, times(1)).findAll();
     }
 
-//    @Test
-//    void checkAndReturnExpiredProducts() {
-//        Store store = new Store();
-//        Product product = new Product();
-//        product.setExpirationDate(LocalDate.now().minusDays(1));
-//        Map<Product, Integer> products = new HashMap<>();
-//        products.put(product, 10);
-//        store.setProducts(products);
-//        List<Store> stores = Collections.singletonList(store);
-//        when(storeRepository.findAll()).thenReturn(stores);
-//        Stock stock = new Stock();
-//        Map<Product, Integer> stockProducts = new HashMap<>();
-//        stock.setProducts(stockProducts);
-//        when(stockRepository.findAll()).thenReturn(Collections.singletonList(stock));
-//        when(storeRepository.save(store)).thenReturn(store);
-//        when(stockRepository.save(stock)).thenReturn(stock);
-//
-//        storeService.checkAndReturnExpiredProducts();
-//
-//        assertThat(store.getProducts().get(product)).isNull();
-//        assertThat(stock.getProducts().get(product)).isEqualTo(10);
-//        verify(storeRepository, times(1)).findAll();
-//        verify(storeRepository, times(1)).save(store);
-//        verify(stockRepository, times(1)).save(stock);
-//    }
+    @Test
+    void checkAndReturnExpiredProducts() {
+        Product expiredProduct = new Product();
+        expiredProduct.setExpirationDate(LocalDate.now().minusDays(1));
+
+        Store store = new Store();
+        store.setProducts(new HashMap<>(Map.of(expiredProduct, 10)));
+
+        Stock stock = new Stock();
+        stock.setProducts(new HashMap<>(Map.of(expiredProduct, 5)));
+
+        when(storeRepository.findAll()).thenReturn(List.of(store));
+        when(stockRepository.findAll()).thenReturn(List.of(stock));
+
+        storeService.checkAndReturnExpiredProducts();
+
+        verify(stockRepository).save(stock);
+        verify(storeRepository).save(store);
+
+        assertEquals(15, stock.getProducts().get(expiredProduct));
+        assertFalse(store.getProducts().containsKey(expiredProduct));
+    }
 
     @Test
     void sellProduct() {
