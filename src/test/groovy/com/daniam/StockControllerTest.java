@@ -1,5 +1,9 @@
 package com.daniam;
 
+import com.daniam.controller.StockController;
+import com.daniam.domain.Product;
+import com.daniam.domain.Stock;
+import com.daniam.service.StockService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -25,7 +29,7 @@ class StockControllerTest {
     private StockController stockController;
 
     private Product product;
-    private  Stock stock;
+    private Stock stock;
 
     @BeforeEach
     void setUp() {

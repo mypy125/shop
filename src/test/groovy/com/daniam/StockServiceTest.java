@@ -1,6 +1,9 @@
 package com.daniam;
 
-import com.daniam.impl.StockServiceImpl;
+import com.daniam.domain.Product;
+import com.daniam.domain.Stock;
+import com.daniam.exception.StockNotFoundException;
+import com.daniam.service.impl.StockServiceImpl;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -9,6 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import com.daniam.repository.StockRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

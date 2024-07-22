@@ -1,11 +1,14 @@
 package com.daniam;
 
-import com.daniam.dto.ProductCreateRequestDto;
-import com.daniam.dto.ProductUpdateRequestDto;
+import com.daniam.controller.ProductController;
+import com.daniam.domain.Product;
+import com.daniam.controller.dto.ProductCreateRequestDto;
+import com.daniam.controller.dto.ProductUpdateRequestDto;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.daniam.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

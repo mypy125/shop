@@ -7,7 +7,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDate;
 import java.util.*;
 
-import com.daniam.impl.StoreServiceImpl;
+import com.daniam.domain.Product;
+import com.daniam.domain.Stock;
+import com.daniam.domain.Store;
+import com.daniam.service.impl.StoreServiceImpl;
+import com.daniam.repository.StockRepository;
+import com.daniam.repository.StoreRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

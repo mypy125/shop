@@ -4,7 +4,10 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-import com.daniam.dto.StoreCreateRequestDto;
+import com.daniam.controller.StoreController;
+import com.daniam.domain.Product;
+import com.daniam.domain.Store;
+import com.daniam.service.StoreService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,12 +17,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.daniam.dto.ProductReturnRequestDto;
-import com.daniam.dto.ProductSaleRequestDto;
+import com.daniam.controller.dto.ProductReturnRequestDto;
+import com.daniam.controller.dto.ProductSaleRequestDto;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 

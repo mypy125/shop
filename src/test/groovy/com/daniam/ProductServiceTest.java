@@ -1,8 +1,13 @@
 package com.daniam;
 
-import com.daniam.dto.ProductCreateRequestDto;
-import com.daniam.dto.ProductUpdateRequestDto;
-import com.daniam.impl.ProductServiceImpl;
+import com.daniam.domain.Product;
+import com.daniam.controller.dto.ProductCreateRequestDto;
+import com.daniam.controller.dto.ProductUpdateRequestDto;
+import com.daniam.exception.ProductException;
+import com.daniam.exception.ProductNotFoundException;
+import com.daniam.service.impl.ProductServiceImpl;
+import com.daniam.mapping.ProductMapping;
+import com.daniam.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
