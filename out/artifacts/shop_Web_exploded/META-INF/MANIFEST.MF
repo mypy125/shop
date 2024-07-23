@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: mohito
+Build-Jdk: 17.0.11
+Implementation-Title: shop
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.daniam
+Main-Class: ${start-class}
+
