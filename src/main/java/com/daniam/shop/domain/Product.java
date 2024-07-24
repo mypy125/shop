@@ -1,6 +1,10 @@
 package com.daniam.shop.domain;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
